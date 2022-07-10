@@ -6,6 +6,7 @@ import {provider} from 'web3-core';
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {META_MASK_FOX} from '../../pages';
+import {simpleStorageABI, simpleStorageContractAddress} from "../contracts/simple-storage";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class Web3Service {
   accounts: string[] | undefined;
   balance: string | undefined;
   sign: string | undefined;
+  simpleStorage: any;
 
   constructor() {
     const providerOptions = {
@@ -103,4 +105,21 @@ export class Web3Service {
     }
   }
 
+  /**
+   * 存数据合约调用
+   */
+  async setDataContract(number) {
+    await this.connectAccount();
+    this.simpleStorage = new this.web3js.eth.Contract(simpleStorageABI, simpleStorageContractAddress);
+    return await this.simpleStorage.methods.set(number).call().then(console.log);
+  }
+
+  /**
+   * 取数据合约调用
+   */
+  async getDataContract() {
+    await this.connectAccount();
+    this.simpleStorage = new this.web3js.eth.Contract(simpleStorageABI, simpleStorageContractAddress);
+    return await this.simpleStorage.methods.get().call().then(console.log);
+  }
 }

@@ -40,6 +40,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    // this.web3Service.setDataContract(123).then().catch();
   }
 
   /**
