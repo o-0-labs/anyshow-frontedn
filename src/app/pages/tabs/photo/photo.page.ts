@@ -19,7 +19,6 @@ export class PhotoPage implements OnInit {
 
   async ngOnInit() {
     await this.photoService.loadSaved();
-    this.web3Service.simpleStorageContract();
   }
 
   addPhotoToGallery() {
