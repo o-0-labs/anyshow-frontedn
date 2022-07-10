@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{ 'MINE_TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card color="light">
+    <ion-card-content>
+      <img class="image-avatar" [src]="avatar" alt="avatar"/>
+    </ion-card-content>
+    <ion-card-header>
+      <ion-card-title>{{ user.name }}</ion-card-title>
+      <ion-card-title>{{ user.mobile }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card color="light">
+    <ion-list>
+      <ion-item lines="full">
+        <ion-icon slot="start" name="moon" color="primary"></ion-icon>
+        <ion-label>{{ 'CHANGE_THEME' | translate }}</ion-label>
+        <ion-toggle color="secondary" id="themeToggle" [(ngModel)]="isThemeToggled"
+                    (ionChange)="notifyTheme()"></ion-toggle>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="globe" color="primary"></ion-icon>
+        <ion-label>{{ 'CHANGE_LANGUAGE' | translate }}</ion-label>
+        <ion-toggle color="secondary" [(ngModel)]="isLanguageToggled"
+                    (ionChange)="notifyLanguage()"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <!--登出功能-->
+  <div class="ion-padding">
+    <ion-button expand="full" (click)="logout()">{{ 'LOGOUT' | translate }}</ion-button>
+  </div>
+</ion-content>

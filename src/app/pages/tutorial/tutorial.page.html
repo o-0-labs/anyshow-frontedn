@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar style="--ion-toolbar-background:#ffffff;">
+        <ion-buttons slot="end">
+            <ion-button color="primary" (click)="startApp()"
+                        [hidden]="!showSkip">{{ 'TUTORIAL_SKIP_BUTTON' | translate }}</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <ion-slides #ionSlides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false">
+        <ion-slide *ngFor="let slide of slides">
+            <ion-card color="light">
+                <img [src]="slide.image" [alt]="slide.title"/>
+                <ion-card-title>
+                    <h2 [innerHTML]="slide.title"></h2>
+                </ion-card-title>
+                <ion-card-content>
+                    <p [innerHTML]="slide.description"></p>
+                </ion-card-content>
+            </ion-card>
+        </ion-slide>
+        <ion-slide>
+            <ion-card color="light">
+                <img [src]="tutorialSlide4" alt="{{ 'TUTORIAL_SLIDE4_TITLE' | translate }}"/>
+                <ion-card-title>
+                    <h2>{{ 'TUTORIAL_SLIDE4_TITLE' | translate }}</h2>
+                </ion-card-title>
+                <ion-card-content>
+                    <ion-button (click)="startApp()">
+                        {{ 'TUTORIAL_CONTINUE_BUTTON' | translate }}
+                        <ion-icon name="arrow-forward"></ion-icon>
+                    </ion-button>
+                </ion-card-content>
+            </ion-card>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

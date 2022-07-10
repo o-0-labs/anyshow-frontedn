@@ -1,0 +1,11 @@
+{
+  "/proxyApi": {
+    "target": "http://127.0.0.1:9999",
+    "secure": false,
+    "loglevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/proxyApi": ""
+    }
+  }
+}
