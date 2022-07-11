@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {mainPage} from '../index';
 import {NavController} from '@ionic/angular';
-import md5 from 'js-md5';
 import {CacheKeys, CacheService} from '../../providers/common/cache-service';
 import {Prompt} from '../../providers/common/prompt';
 import {Api} from '../../providers/api/api';
@@ -16,8 +15,12 @@ import {Web3Service} from '../../providers/services/web3.service';
 })
 export class LoginPage implements OnInit {
 
-  account: { mobile: string; password: string };
-
+  accounts: {
+    walletAddress: string,
+    signMessage: string,
+    signature: string
+  };
+  walletAddress: string[] | undefined;
   private loginError: string;
   private loginMobileError: string;
   private loginPasswordError: string;
@@ -29,9 +32,10 @@ export class LoginPage implements OnInit {
               public api: Api,
               public web3Service: Web3Service,
               private prompt: Prompt) {
-    this.account = {
-      mobile: '',
-      password: ''
+    this.accounts = {
+      walletAddress: '',
+      signMessage: '',
+      signature: ''
     };
     this.changeLanguage();
     this.translate.onLangChange.subscribe(() => {
@@ -44,32 +48,32 @@ export class LoginPage implements OnInit {
   }
 
   /**
-   * 用户登录方法
+   * 用户登录注册方法
    *
    * @author 李元坝
    * @date 20220702
    */
-  doLogin() {
-    if (this.account.mobile == null || this.account.mobile === '') {
+  async doLogin() {
+    this.walletAddress = await this.web3Service.connectAccount();
+    if (this.walletAddress.length < 0) {
       this.prompt.showToast(this.loginMobileError, 'danger');
       return false;
     }
-    if (this.account.password == null || this.account.password === '') {
-      this.prompt.showToast(this.loginPasswordError, 'danger');
-      return false;
-    }
-    this.account.password = md5(this.account.password); // MD5加密
+    this.accounts.signature = await this.web3Service.messageSign(this.walletAddress[0]);
     const loading = this.prompt.showLoading(this.loggingIn);
-    this.api.login(this.account).then((resp: any) => {
+    this.accounts.walletAddress = this.walletAddress[0];
+    this.accounts.signMessage = this.walletAddress[0];
+
+    this.api.login(this.accounts).then((resp: any) => {
       loading.then(response => {
         response.dismiss().then(); // 取消正在登录加载动画
       });
-      if (resp.data.springAuthUser == null) {
+      if (resp.data == null) {
         this.prompt.showToast(this.loginError, 'danger');
         return false;
       }
       // 存储用户信息及 token
-      this.cacheService.set(CacheKeys.user, resp.data.springAuthUser).catch();
+      this.cacheService.set(CacheKeys.user, resp.data).catch();
       this.cacheService.set(CacheKeys.token, resp.data.token).catch();
       this.navController.navigateRoot(mainPage).then();
     }, (err) => {

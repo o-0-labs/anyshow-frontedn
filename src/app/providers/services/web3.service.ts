@@ -93,15 +93,13 @@ export class Web3Service {
    * 消息签名
    */
   async messageSign(message: string) {
-    await this.connectAccount();
-    if (this.accounts.length > 0) {
-      await this.web3js.eth.personal.sign(this.web3js.utils.utf8ToHex(message), this.accounts[0], null, (err, signature) => {
-        this.sign = signature;
-        // console.log('地址：'+this.accounts[0]);
-        // console.log('内容：'+message);
-        // console.log('签名结果：'+this.sign);
-        return this.sign;
-      });
+    if (this.accounts.length < 0) {
+      await this.connectAccount();
+      this.sign = await this.web3js.eth.personal.sign(this.web3js.utils.utf8ToHex(message), this.accounts[0], null);
+      return this.sign;
+    } else {
+      this.sign = await this.web3js.eth.personal.sign(this.web3js.utils.utf8ToHex(message), this.accounts[0], null);
+      return this.sign;
     }
   }
 

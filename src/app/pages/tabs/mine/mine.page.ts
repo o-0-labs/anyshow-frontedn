@@ -29,7 +29,7 @@ export class MinePage implements OnInit {
         this.prompt.showToast(this.getUserError, 'danger');
         return false;
       }
-      this.user = response.user;
+      this.user = response;
     }).catch();
     // 初始化主题信息
     this.cacheService.get(CacheKeys.themeIsToggled).then((response: any) => {

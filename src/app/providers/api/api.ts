@@ -22,29 +22,39 @@ export class Api {
     }
   }
 
-  // 获取登录接口
+  // 获取登录 接口
   login(params: any) {
     return this.http.post(ApiConfig.getInstance().loginUrl, params);
   }
 
-  // 获取资金变化列表接口
-  getAccountAmount(params?: any, apiToken?: any) {
-    return this.http.get(ApiConfig.getInstance().getAccountAmountUrl, params, apiToken);
+  // 添加朋友时搜索 接口
+  getUserSearch(params?: any, apiToken?: any) {
+    return this.http.get(ApiConfig.getInstance().getUserSearchUrl, params, apiToken);
   }
 
-  // 获取定时任务管理列表数据接口
-  getTraderTaskCornList(params?: any, apiToken?: any) {
-    return this.http.get(ApiConfig.getInstance().getTraderTaskCornListUrl, params, apiToken);
+  // 获取NFT列表数据 接口
+  getNftList(params?: any, apiToken?: any) {
+    return this.http.get(ApiConfig.getInstance().getNftListUrl, params, apiToken);
   }
 
-  // 获取更新定时任务数据接口
-  postTraderTaskCornUpdateById(params?: any, apiToken?: any) {
-    return this.http.post(ApiConfig.getInstance().postTraderTaskCornUpdateByIdUrl, params, apiToken);
+  // 添加NFT数据 接口
+  postNftAdd(params?: any, apiToken?: any) {
+    return this.http.post(ApiConfig.getInstance().postNftAddUrl, params, apiToken);
   }
 
-  // 获取更新全部定时任务状态接口
-  getTraderTaskCornUpdateScheduledStatus(params?: any, apiToken?: any) {
-    return this.http.get(ApiConfig.getInstance().getTraderTaskCornUpdateScheduledStatusUrl, params, apiToken);
+  // 获取NFT合约 接口
+  getNftContracts(params?: any, apiToken?: any) {
+    return this.http.get(ApiConfig.getInstance().getNftContractsUrl, params, apiToken);
+  }
+
+  // 上传文件 接口
+  postFileUpload(params?: any, apiToken?: any) {
+    return this.http.post(ApiConfig.getInstance().postFileUploadUrl, params, apiToken);
+  }
+
+  // 获取文件 接口
+  getFileList(params?: any, apiToken?: any) {
+    return this.http.get(ApiConfig.getInstance().getFileListUrl, params, apiToken);
   }
 
 }

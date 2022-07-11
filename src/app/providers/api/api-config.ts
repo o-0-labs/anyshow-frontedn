@@ -31,11 +31,13 @@ export class ApiConfig {
 
   // 接口地址配置
   // 用户模块
-  readonly loginUrl = 'api/auth/login';  // 登录接口
-  readonly getAccountAmountUrl = 'api/trader-amount/extraEchartsList';  // 获取资金数据接口
-  readonly getTraderTaskCornListUrl = 'api/trader-task-corn/associatedList';  // 获取定时任务管理列表数据接口
-  readonly postTraderTaskCornUpdateByIdUrl = 'api/trader-task-corn/updateById';  // 更新定时任务数据接口
-  readonly getTraderTaskCornUpdateScheduledStatusUrl = 'api/trader-task-corn/updateScheduledStatus';  // 更新全部定时任务状态接口
+  readonly loginUrl = 'user/login';  // 登录注册 接口
+  readonly getUserSearchUrl = 'user/search';  // 添加朋友时搜索，目前仅支持按地址、昵称搜索 数据接口
+  readonly getNftListUrl = 'nft/list';  // 获取NFT列表数据 接口
+  readonly postNftAddUrl = 'nft/add';  // 添加NFT数据 接口
+  readonly getNftContractsUrl = 'nft/contracts';  // 获取NFT合约 接口
+  readonly postFileUploadUrl = 'file/upload';  // 上传文件 接口
+  readonly getFileListUrl = 'file/getFileList';  // 获取文件 接口
 
   private constructor() {
   }
@@ -56,10 +58,10 @@ export class ApiConfig {
     let domain: string;
     switch (domainType) {
       case DomainType.product:
-        domain = 'http://39.101.133.17:9999';
+        domain = 'http://39.101.133.17:8080';
         break;
       case DomainType.develop:
-        domain = 'http://127.0.0.1:9999';
+        domain = 'http://127.0.0.1:8080';
         break;
       case DomainType.proxy:
         domain = '/proxyApi';
