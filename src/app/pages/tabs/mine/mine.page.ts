@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {NavController} from '@ionic/angular';
+import {NavController,MenuController} from '@ionic/angular';
 import {loginPage, AVATAR} from '../../index';
 import {Prompt} from '../../../providers/common/prompt';
 import {CacheKeys, CacheService} from '../../../providers/common/cache-service';
@@ -20,6 +20,7 @@ export class MinePage implements OnInit {
   private getThemeError: string;
   private getLanguageError: string;
   constructor(public translate: TranslateService,
+              private menu: MenuController,
               private prompt: Prompt,
               public navController: NavController,
               private cacheService: CacheService) {
@@ -102,5 +103,10 @@ export class MinePage implements OnInit {
       this.getThemeError = values.GET_THEME_ERROR;
       this.getLanguageError = values.GET_LANGUAGE_ERROR;
     });
+  }
+
+  openCustom() {
+    this.menu.enable(true, 'custom');
+    this.menu.open('custom');
   }
 }

@@ -7,10 +7,31 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="false">
+        <ion-tabs>
+          <ion-tab-bar slot="top">
+            <ion-tab-button tab="nft" style="color: cornflowerblue">
+              <ion-icon name="layers-outline"></ion-icon>
+              <ion-label>NFT</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="art">
+              <ion-icon name="extension-puzzle-outline"></ion-icon>
+              <ion-label>Art</ion-label>
+            </ion-tab-button>
+          </ion-tab-bar>
+        </ion-tabs>
+
+        <ion-card style="margin-top: 70px">
+          <img src="./assets/images/madison.jpg" alt="nft"/>
+          <ion-card-header>
+            <ion-card-subtitle>Destination</ion-card-subtitle>
+            <ion-card-title>Madison, WI</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the
+            Wisconsin Territory in 1836.
+          </ion-card-content>
+        </ion-card>
+
 </ion-content>

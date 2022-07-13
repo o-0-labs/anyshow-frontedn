@@ -1,37 +1,87 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>{{ 'MINE_TITLE' | translate }}</ion-title>
-  </ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="2">
+        <ion-avatar>
+          <img [src]="avatar" alt="avatar"/>
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="8" style="margin-top: 10px">
+        <ion-label>{{ user.name }}</ion-label>
+      </ion-col>
+      <ion-col size="2">
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-header>
+<ion-menu side="end" menuId="custom" contentId="main">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>菜单</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-card color="light">
+      <ion-list>
+        <ion-item lines="full">
+          <ion-icon slot="start" name="moon" color="primary"></ion-icon>
+          <ion-label>{{ 'CHANGE_THEME' | translate }}</ion-label>
+          <ion-toggle color="secondary" id="themeToggle" [(ngModel)]="isThemeToggled"
+                      (ionChange)="notifyTheme()"></ion-toggle>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="globe" color="primary"></ion-icon>
+          <ion-label>{{ 'CHANGE_LANGUAGE' | translate }}</ion-label>
+          <ion-toggle color="secondary" [(ngModel)]="isLanguageToggled"
+                      (ionChange)="notifyLanguage()"></ion-toggle>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+    <!--登出功能-->
+    <div class="ion-padding">
+      <ion-button expand="full" (click)="logout()">{{ 'LOGOUT' | translate }}</ion-button>
+    </div>
+  </ion-content>
+</ion-menu>
+<ion-content [fullscreen]="false" id="main">
+  <ion-tabs>
+    <ion-tab-bar slot="top">
+      <ion-tab-button tab="nft" style="color: cornflowerblue">
+        <ion-icon name="layers-outline"></ion-icon>
+        <ion-label>NFT</ion-label>
+      </ion-tab-button>
 
-<ion-content [fullscreen]="true">
-  <ion-card color="light">
-    <ion-card-content>
-      <img class="image-avatar" [src]="avatar" alt="avatar"/>
-    </ion-card-content>
+      <ion-tab-button tab="gallery">
+        <ion-icon name="folder-open-outline"></ion-icon>
+        <ion-label>作品集</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="like">
+        <ion-icon name="thumbs-up-outline"></ion-icon>
+        <ion-label>点赞</ion-label>
+        <ion-badge>99+</ion-badge>
+      </ion-tab-button>
+
+      <ion-tab-button tab="collect">
+        <ion-icon name="ribbon-outline"></ion-icon>
+        <ion-label>收藏</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  <ion-card style="margin-top: 70px">
+    <img src="./assets/images/madison.jpg" alt="nft"/>
     <ion-card-header>
-      <ion-card-title>{{ user.name }}</ion-card-title>
-      <ion-card-content>{{ user.address }}</ion-card-content>
+      <ion-card-subtitle>Destination</ion-card-subtitle>
+      <ion-card-title>Madison, WI</ion-card-title>
     </ion-card-header>
+    <ion-card-content>
+      Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the
+      Wisconsin Territory in 1836.
+    </ion-card-content>
   </ion-card>
-  <ion-card color="light">
-    <ion-list>
-      <ion-item lines="full">
-        <ion-icon slot="start" name="moon" color="primary"></ion-icon>
-        <ion-label>{{ 'CHANGE_THEME' | translate }}</ion-label>
-        <ion-toggle color="secondary" id="themeToggle" [(ngModel)]="isThemeToggled"
-                    (ionChange)="notifyTheme()"></ion-toggle>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-icon slot="start" name="globe" color="primary"></ion-icon>
-        <ion-label>{{ 'CHANGE_LANGUAGE' | translate }}</ion-label>
-        <ion-toggle color="secondary" [(ngModel)]="isLanguageToggled"
-                    (ionChange)="notifyLanguage()"></ion-toggle>
-      </ion-item>
-    </ion-list>
-  </ion-card>
-  <!--登出功能-->
-  <div class="ion-padding">
-    <ion-button expand="full" (click)="logout()">{{ 'LOGOUT' | translate }}</ion-button>
-  </div>
 </ion-content>
